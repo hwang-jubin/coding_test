@@ -11,20 +11,17 @@ public class Main {
             arr[i] = kb.nextInt();
         }
 
-        int pi = m;
-        int answer = Integer.MIN_VALUE;
+        int answer = 0, sum = 0;
 
-        while (pi < n) {
-            int add = 0;
-            for (int i = pi - m; i < pi; i++) {
-                add += arr[i];
-            }
-            if (answer < add) {
-                answer = add;
-            }
-            pi++;
-
+        for (int i = 0; i < m; i++) {
+            sum += arr[i];
         }
-        System.out.println(answer);
+        answer = sum;
+        for (int i = m; i < n; i++) {
+            sum += (arr[i] - arr[i - m]);
+            answer = Math.max(answer, sum);
+        }
+
+        System.out.print(answer);
     }
 }
