@@ -11,18 +11,18 @@ public class Main {
             arr[i] = kb.nextInt();
         }
         int answer = 0;
-        int pi = 0;
+        int lt = 0;
 
-        for (int i = 0; i < n; i++) {
-            int sum = 0;
-            for (int j = 0; j < n - pi; j++) {
-                sum += arr[pi + j];
-                if (sum == m) {
+        int sum = 0;
+        for (int rt = 0; rt < n; rt++) {
+            sum += arr[rt];
+            if (sum == m)
+                answer++;
+            while (sum > m) {
+                sum -= arr[lt++];
+                if (sum == m)
                     answer++;
-                    break;
-                }
             }
-            pi++;
 
         }
 
