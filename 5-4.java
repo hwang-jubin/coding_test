@@ -1,39 +1,33 @@
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner kb = new Scanner(System.in);
-        String arr = kb.next();
-
+class Main {
+    public int solution(String str) {
+        int answer = 0;
         Stack<Integer> stack = new Stack<>();
-
-        for (char x : arr.toCharArray()) {
-            switch (x) {
-                case '+':
-                    int a = stack.pop();
-                    int b = stack.pop();
-                    stack.push(a + b);
-                    break;
-                case '-':
-                    a = stack.pop();
-                    b = stack.pop();
-                    stack.push(b - a);
-                    break;
-                case '*':
-                    a = stack.pop();
-                    b = stack.pop();
-                    stack.push(a * b);
-                    break;
-                case '/':
-                    a = stack.pop();
-                    b = stack.pop();
-                    stack.push(b / a);
-                    break;
-                default:
-                    stack.push(x - '0'); // 문자를 숫자로 변환하여 스택에 저장
-                    break;
+        for (char x : str.toCharArray()) {
+            if (Character.isDigit(x)) {
+                stack.push(x - 48);
+            } else {
+                int rt = stack.pop();
+                int lt = stack.pop();
+                if (x == '+')
+                    stack.push(lt + rt);
+                else if (x == '-')
+                    stack.push(lt - rt);
+                else if (x == '*')
+                    stack.push(lt * rt);
+                else if (x == '/')
+                    stack.push(lt / rt);
             }
         }
-        System.out.println(stack.pop());
+        answer = stack.get(0);
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str = kb.next();
+        System.out.println(T.solution(str));
     }
 }
